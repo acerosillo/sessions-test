@@ -100,12 +100,14 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <TextField
-          label="Search products..."
-          value={searchTerm}
-          onChange={handleSearch}
-          style={{ width: 200, height: 50, marginRight: 15 }}
-        />
+        <Button
+          variant="contained"
+          onClick={handleReset}
+          style={{ width: 200, height: 55, marginRight: 15, marginLeft: 15 }}
+        >
+          View All Products
+        </Button>
+
         <FormControl>
           <InputLabel>Sort by</InputLabel>
           <Select
@@ -132,13 +134,14 @@ function App() {
             <MenuItem value="women's clothing">Women's Clothing</MenuItem>
           </Select>
         </FormControl>
-        <Button
-          variant="contained"
-          onClick={handleReset}
-          style={{ width: 200, height: 55, marginRight: 15 }}
-        >
-          View All Products
-        </Button>
+
+        <TextField
+          label="Search products..."
+          value={searchTerm}
+          onChange={handleSearch}
+          style={{ width: 200, height: 50, marginRight: 15 }}
+        />
+
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
