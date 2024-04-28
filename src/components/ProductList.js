@@ -21,16 +21,23 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortType, setSortType] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [loading, setLoading] = useState(true);
 
   //fetch data from the API
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data);
-        setFilteredProducts(data);
-      })
-      .catch((error) => console.log(error));
+    const timer = setTimeout(() => {
+      fetch("https://fakestoreapi.com/products")
+        .then((response) => response.json())
+        .then((data) => {
+          setProducts(data);
+          setFilteredProducts(data);
+          setLoading(false); // Set loading to false after data is fetched
+        })
+        .catch((error) => console.log(error));
+    }, 1000); // Fetch data after 1 second
+
+    // Cleanup function to clear timeout in case component unmounts
+    return () => clearTimeout(timer);
   }, []);
 
   //useffect for filtering products based on search term
@@ -84,6 +91,10 @@ function App() {
     setSortType("");
     setFilteredProducts(products);
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="App">
