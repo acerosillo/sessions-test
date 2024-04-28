@@ -23,11 +23,6 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [loading, setLoading] = useState(true);
 
-  setSearchTerm("");
-  setSelectedCategory("");
-  setSortType("");
-  setFilteredProducts(products);
-
   //fetch data from the API
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -79,6 +74,7 @@ function App() {
   //sorts the categories based on the selected category
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
+
     if (e.target.value === "") {
       setFilteredProducts(products);
     } else {
