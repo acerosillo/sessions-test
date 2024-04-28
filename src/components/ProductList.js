@@ -104,14 +104,14 @@ function App() {
           label="Search products..."
           value={searchTerm}
           onChange={handleSearch}
-          style={{ width: 200, height: 50 }}
+          style={{ width: 200, height: 50, marginRight: 15 }}
         />
         <FormControl>
           <InputLabel>Sort by</InputLabel>
           <Select
             value={sortType}
             onChange={handleSort}
-            style={{ width: 200, height: 50 }}
+            style={{ width: 200, height: 55, marginRight: 15 }}
           >
             <MenuItem value="">None</MenuItem>
             <MenuItem value="asc">Price Low to High</MenuItem>
@@ -123,7 +123,7 @@ function App() {
           <Select
             value={selectedCategory}
             onChange={handleCategoryChange}
-            style={{ width: 200, height: 50 }}
+            style={{ width: 200, height: 55, marginRight: 15 }}
           >
             <MenuItem value="">All Categories</MenuItem>
             <MenuItem value="electronics">Electronics</MenuItem>
@@ -132,8 +132,12 @@ function App() {
             <MenuItem value="women's clothing">Women's Clothing</MenuItem>
           </Select>
         </FormControl>
-        <Button variant="contained" onClick={handleReset}>
-          Reset
+        <Button
+          variant="contained"
+          onClick={handleReset}
+          style={{ width: 200, height: 55, marginRight: 15 }}
+        >
+          View All Products
         </Button>
         <TableContainer component={Paper}>
           <Table>
