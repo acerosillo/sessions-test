@@ -81,7 +81,3 @@ The requirements are open, we’d like to see your creativity and ability to dev
 Use comments to explain missing parts of the implementation or to explain choices you’ve made and why you made them. Feel free to use any other libraries that you want to use.
 We expect this test will take 1-2 hours to complete.
 Email us the code once you’re happy and provide any instructions we may need to get the code running locally.
-
-filtering
-ordering
-searching

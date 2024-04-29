@@ -17,15 +17,21 @@ import {
 
 function App() {
   const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortType, setSortType] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [loading, setLoading] = useState(true);
 
-  //fetch data from the API
+  // State for filtered products
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  // State for sorted products
+  const [sortedProducts, setSortedProducts] = useState([]);
+
+  // Fetch data from the API
   useEffect(() => {
     const timer = setTimeout(() => {
+      //console.log("fetch data");
       fetch("https://fakestoreapi.com/products")
         .then((response) => response.json())
         .then((data) => {
@@ -40,7 +46,7 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  //useffect for filtering products based on search term
+  // Use effect for filtering products based on search term
   useEffect(() => {
     const filtered = products.filter((product) =>
       product.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -48,9 +54,21 @@ function App() {
     setFilteredProducts(filtered);
   }, [searchTerm, products]);
 
-  //useffect for filtering by price
+  // Use effect for filtering by category
   useEffect(() => {
-    const sortedProducts = [...filteredProducts].sort((a, b) => {
+    if (selectedCategory === "") {
+      setFilteredProducts(products);
+    } else {
+      const filteredByCategory = products.filter(
+        (product) => product.category === selectedCategory
+      );
+      setFilteredProducts(filteredByCategory);
+    }
+  }, [selectedCategory, products]);
+
+  // Use effect for sorting products
+  useEffect(() => {
+    const sorted = [...filteredProducts].sort((a, b) => {
       if (sortType === "asc") {
         return a.price - b.price;
       }
@@ -59,33 +77,21 @@ function App() {
       }
       return 0;
     });
-    setFilteredProducts(sortedProducts);
+    setSortedProducts(sorted);
   }, [sortType, filteredProducts]);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  //checks for sort type and sorts the products based on the selected sort type
   const handleSort = (e) => {
     setSortType(e.target.value);
   };
 
-  //sorts the categories based on the selected category
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
-
-    if (e.target.value === "") {
-      setFilteredProducts(products);
-    } else {
-      const filteredByCategory = products.filter(
-        (product) => product.category === e.target.value
-      );
-      setFilteredProducts(filteredByCategory);
-    }
   };
 
-  //resets all filters back to default
   const handleReset = () => {
     setSearchTerm("");
     setSelectedCategory("");
@@ -100,20 +106,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Button
-          variant="contained"
-          onClick={handleReset}
-          style={{ width: 200, height: 55, marginRight: 15, marginLeft: 15 }}
-        >
-          View All Products
-        </Button>
-
         <FormControl>
           <InputLabel>Sort by</InputLabel>
           <Select
             value={sortType}
             onChange={handleSort}
-            style={{ width: 200, height: 55, marginRight: 15 }}
+            style={{ width: 200, height: 55, marginRight: 15, marginLeft: 15 }}
           >
             <MenuItem value="">None</MenuItem>
             <MenuItem value="asc">Price Low to High</MenuItem>
@@ -142,6 +140,14 @@ function App() {
           style={{ width: 200, height: 50, marginRight: 15 }}
         />
 
+        <Button
+          variant="contained"
+          onClick={handleReset}
+          style={{ width: 200, height: 55, marginRight: 15 }}
+        >
+          Reset
+        </Button>
+
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
@@ -153,7 +159,7 @@ function App() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredProducts.map((product) => (
+              {sortedProducts.map((product) => (
                 <TableRow key={product.id}>
                   <TableCell>
                     <img
