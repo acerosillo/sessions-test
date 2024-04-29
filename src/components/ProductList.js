@@ -108,11 +108,7 @@ function App() {
       <header className="App-header">
         <FormControl>
           <InputLabel>Sort by</InputLabel>
-          <Select
-            value={sortType}
-            onChange={handleSort}
-            style={{ width: 200, height: 55, marginRight: 15, marginLeft: 15 }}
-          >
+          <Select value={sortType} onChange={handleSort}>
             <MenuItem value="">None</MenuItem>
             <MenuItem value="asc">Price Low to High</MenuItem>
             <MenuItem value="desc">Price High to Low</MenuItem>
@@ -120,11 +116,7 @@ function App() {
         </FormControl>
         <FormControl>
           <InputLabel>Category</InputLabel>
-          <Select
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-            style={{ width: 200, height: 55, marginRight: 15 }}
-          >
+          <Select value={selectedCategory} onChange={handleCategoryChange}>
             <MenuItem value="">All Categories</MenuItem>
             <MenuItem value="electronics">Electronics</MenuItem>
             <MenuItem value="jewelery">Jewelery</MenuItem>
@@ -137,46 +129,41 @@ function App() {
           label="Search products..."
           value={searchTerm}
           onChange={handleSearch}
-          style={{ width: 200, height: 50, marginRight: 15 }}
         />
 
-        <Button
-          variant="contained"
-          onClick={handleReset}
-          style={{ width: 200, height: 55, marginRight: 15 }}
-        >
+        <Button variant="contained" onClick={handleReset}>
           Reset
         </Button>
-
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Image</TableCell>
-                <TableCell>Title</TableCell>
-                <TableCell>Price</TableCell>
-                <TableCell>Category</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {sortedProducts.map((product) => (
-                <TableRow key={product.id}>
-                  <TableCell>
-                    <img
-                      src={product.image}
-                      alt={product.title}
-                      style={{ width: 50, height: 50 }}
-                    />
-                  </TableCell>
-                  <TableCell>{product.title}</TableCell>
-                  <TableCell>${product.price}</TableCell>
-                  <TableCell>{product.category}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
       </header>
+
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Image</TableCell>
+              <TableCell>Title</TableCell>
+              <TableCell>Price</TableCell>
+              <TableCell>Category</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {sortedProducts.map((product) => (
+              <TableRow key={product.id}>
+                <TableCell>
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    style={{ width: 50, height: 50 }}
+                  />
+                </TableCell>
+                <TableCell>{product.title}</TableCell>
+                <TableCell>${product.price}</TableCell>
+                <TableCell>{product.category}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }
