@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   Table,
   TableBody,
@@ -32,11 +33,11 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       //console.log("fetch data");
-      fetch("https://fakestoreapi.com/products")
-        .then((response) => response.json())
-        .then((data) => {
-          setProducts(data);
-          setFilteredProducts(data);
+      axios
+        .get("https://fakestoreapi.com/products")
+        .then((response) => {
+          setProducts(response.data);
+          setFilteredProducts(response.data);
           setLoading(false); // Set loading to false after data is fetched
         })
         .catch((error) => console.log(error));
