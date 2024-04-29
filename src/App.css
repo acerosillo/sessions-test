@@ -24,14 +24,13 @@ header label {
   padding: 0 10px;
 }
 
-header .css-1nrlq1o-MuiFormControl-root,
-header .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root,
-header .css-sghohy-MuiButtonBase-root-MuiButton-root,
+header .MuiInputBase-formControl,
+header .MuiOutlinedInput-input,
+header .MuiOutlinedInput-root,
 header .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
   min-width: 200px;
-  margin-right: 15px;
-  margin-bottom: 15px;
   height: 55px;
+  margin-right: 15px !important;
 }
 
 header .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
@@ -39,19 +38,27 @@ header .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
 }
 
 @media only screen and (max-width: 600px) {
-  header .css-1nrlq1o-MuiFormControl-root,
-  header .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root,
-  header .css-sghohy-MuiButtonBase-root-MuiButton-root {
-    min-width: unset;
+  header .MuiInputBase-formControl,
+  header .MuiOutlinedInput-input,
+  header .MuiOutlinedInput-root {
     width: 100% !important;
-    margin-right: 10px;
-    margin-bottom: 15px;
-    margin-left: 10px;
+    margin-bottom: 15px !important;
+    margin-left: 15px !important;
+  }
+
+  header label {
+    margin-left: 15px !important;
   }
 
   header .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
     width: 100%;
     margin-right: 20px;
     margin-bottom: 15px;
+  }
+
+  header .MuiButton-contained {
+    margin-left: 15px !important;
+    width: 100% !important;
+    margin-right: 15px;
   }
 }
