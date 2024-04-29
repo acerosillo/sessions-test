@@ -24,6 +24,13 @@ header label {
   padding: 0 10px;
 }
 
+.App {
+  padding: 1rem;
+}
+h1 {
+  padding: 0 1rem;
+}
+
 header .MuiInputBase-formControl,
 header .MuiOutlinedInput-input,
 header .MuiOutlinedInput-root,
@@ -38,6 +45,12 @@ header .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
 }
 
 @media only screen and (max-width: 600px) {
+  .App {
+    padding: 0 0.2rem;
+  }
+  header > div {
+    width: 95%;
+  }
   header .MuiInputBase-formControl,
   header .MuiOutlinedInput-input,
   header .MuiOutlinedInput-root {
