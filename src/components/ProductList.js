@@ -8,12 +8,9 @@ import {
   TableRow,
   Paper,
   TextField,
-  Select,
   Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
 } from "@mui/material";
+import DropDown from "./DropDown";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -51,6 +48,7 @@ function App() {
     const filtered = products.filter((product) =>
       product.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
     setFilteredProducts(filtered);
   }, [searchTerm, products]);
 
@@ -62,6 +60,7 @@ function App() {
       const filteredByCategory = products.filter(
         (product) => product.category === selectedCategory
       );
+
       setFilteredProducts(filteredByCategory);
     }
   }, [selectedCategory, products]);
@@ -106,24 +105,28 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <FormControl>
-          <InputLabel>Sort by</InputLabel>
-          <Select value={sortType} onChange={handleSort}>
-            <MenuItem value="">None</MenuItem>
-            <MenuItem value="asc">Price Low to High</MenuItem>
-            <MenuItem value="desc">Price High to Low</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl>
-          <InputLabel>Category</InputLabel>
-          <Select value={selectedCategory} onChange={handleCategoryChange}>
-            <MenuItem value="">All Categories</MenuItem>
-            <MenuItem value="electronics">Electronics</MenuItem>
-            <MenuItem value="jewelery">Jewelery</MenuItem>
-            <MenuItem value="men's clothing">Men's Clothing</MenuItem>
-            <MenuItem value="women's clothing">Women's Clothing</MenuItem>
-          </Select>
-        </FormControl>
+        <DropDown
+          label="Sort by"
+          value={sortType}
+          onChange={handleSort}
+          options={[
+            { label: "None", value: "" },
+            { label: "Price Low to High", value: "asc" },
+            { label: "Price High to Low", value: "desc" },
+          ]}
+        />
+        <DropDown
+          label="Category"
+          value={selectedCategory}
+          onChange={handleCategoryChange}
+          options={[
+            { label: "All Categories", value: "" },
+            { label: "Electronics", value: "electronics" },
+            { label: "Jewelery", value: "jewelery" },
+            { label: "Men's Clothing", value: "men's clothing" },
+            { label: "Women's Clothing", value: "women's clothing" },
+          ]}
+        />
 
         <TextField
           label="Search products..."
